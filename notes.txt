@@ -362,3 +362,291 @@ server.listen(5000); // client port
 In the above example, require() function returns an object because http module returns its functionality as an object, you can then use its properties and methods using dot ( . )  notation e.g. http.createServer().
 
 
+
+
+Node.Js Local Modules
+
+Local modules are modules created locally in your Node.js application. 
+These modules include different functionalities of your application in separate files and folders. 
+You can also package it and distribute it via NPM, so that the Node.js community can use it. 
+For example, if you need to connect to MongoDB and fetch data then you can create a module for it, which can be reused in your application.
+
+Writing a Simple Module:
+Let's write a simple logging module which logs the information, warning or error to the console.
+
+In Node.js, the module should be placed in a separate JavaScript file. So, create a Log.js file and write the following code in it.
+
+
+log.js
+---------------------------------------------------------------------------------------------------------------------
+
+var log = {
+ info: function (info) {
+   console.log("Info: " + info);
+ },
+ warning: function (warning) {
+   console.log("Warning: " + warning);
+ },
+ error: function (error) {
+   console.log("Error: " + error);
+ },
+};
+ 
+module.exports = log;
+ 
+
+---------------------------------------------------------------------------------------------------------------------
+
+
+
+In the above example of the logging module, we have created an object with three functions - info(), warning() and error(). At the end, we have assigned this object to module.exports. The module.exports in the above example exposes a log object as a module.
+
+The module.exports is a special object which is included in every JS file in the Node.js application by default. Use module.exports or exports to expose a function, object or variable as a module in Node.js.
+
+Now, let's see how to use the above logging module in our application.
+Loading Local Module
+To use local modules in your application, you need to load it using require() function in the same way as core module. However, you need to specify the path of the JavaScript file of the module.
+The following example demonstrates how to use the above logging module contained in Log.js.
+
+app.js
+---------------------------------------------------------------------------------------------------------------------
+var myLogModule = require("./log.js");
+console.log("myLogModule : ", myLogModule);
+myLogModule.info("Node.js started");
+ 
+---------------------------------------------------------------------------------------------------------------------
+
+In the above example, app.js is using a log module. First, it loads the logging module using require() function and the specified path where the logging module is stored. The logging module is contained in the Log.js file in the root folder. So, we have specified the path './Log.js' in the require() function. The '.' denotes a root folder.
+
+The require() function returns a log object because the logging module exposes an object in Log.js using module.exports. So now you can use the logging module as an object and call any of its functions using dot notation e.g myLogModule.info() or myLogModule.warning() or myLogModule.error().
+
+
+Run the above example using the command prompt (in Windows) as shown below.
+
+C:\> node app.js 
+Info: Node.js started
+
+module.exports
+We will learn how to expose different types as a module using module.exports.
+
+The module.exports or exports is a special object which is included in every JS file in the Node.js application by default. 
+The module is a variable that represents the current module and exports is an object that will be exposed as a module.
+So, whatever you assign to module.exports or exports, will be exposed as a module.
+
+Let's see how to expose different types as a module using module.exports.
+
+Export Literals
+The following example exposes a simple string message as a module in Message.js.
+
+message.js
+----------------------------------------------------------------------------------------------------
+// module.exports = "Hello world";
+ 
+exports.msg = "Hello world";
+ 
+// {
+//   lit: {
+//     msg: "Hello world";
+//   }
+// }
+ 
+
+----------------------------------------------------------------------------------------------------
+
+import this message module and use it as shown below.
+
+app.js
+----------------------------------------------------------------------------------------------------
+var lit = require("./literals");
+console.log("lit : ", lit);
+console.log("lit : ", lit.msg);
+ 
+
+----------------------------------------------------------------------------------------------------
+
+Note: 
+You must specify './' as a path to the root folder to import a local module. However, you do not need to specify a path to import Node.js core module or NPM module in the require() function.
+
+Export Object
+exports is an object. So, you can attach properties or methods to it. The following example exposes an object with a string property in Message.js file. 
+
+message.js
+
+exports.SimpleMessage = 'Hello world';
+//or module.exports.SimpleMessage = 'Hello world';
+
+we have attached a property "SimpleMessage" to the exports object. Now, import and use this module as shown below.
+
+app.js
+
+var msg = require('./Messages.js'); 
+console.log(msg.SimpleMessage);
+
+In the above example, require() function will return an object { SimpleMessage : 'Hello World'} and assign it to the msg variable. So, now you can use msg.SimpleMessage.
+
+Run the above example by writing node app.js in the command prompt and see the output as shown below.
+
+C:\> node app.js 
+ Hello World. 
+-------------------------------------------------------------------------------------------------------------------
+The same way as above, you can expose an object with function. The following example exposes an object with log function as a module.
+
+Log.js
+module.exports.log = function (msg) {
+ console.log(msg);
+};
+ 
+
+ 
+The above module will expose an object- 
+ 
+{ 
+log : function(msg){ 
+console.log(msg); 
+}
+} 
+ 
+Use the above module as shown below.
+
+app.js
+
+var msg = require("./log.js");
+console.log("msg", msg);
+msg.log("Hello World");
+ 
+
+
+
+C:\> node app.js 
+Hello World
+--------------------------------------------------------------------
+You can also attach an object to module.exports as shown below.
+
+data.js
+module.exports = {
+ firstName: "James",
+ lastName: "Bond",
+};
+ 
+
+app.js
+var person = require("./data.js");
+ 
+// API : object
+ 
+console.log(person.firstName + " " + person.lastName);
+ 
+
+Run the above example and see the result as shown below.
+C:\> node app.js 
+James Bond
+--------------------------------------------------------------------
+
+Export Function
+You can attach an anonymous function to the exports object as shown below.
+
+Log.js
+
+module.exports = function (msg) { 
+console.log(msg); 
+};
+
+
+
+Now, you can use the above module as below.
+
+app.js
+
+var msg = require('./Log.js'); 
+msg('Hello World'); 
+
+
+The msg variable becomes a function expression in the above example. So, you can invoke the function using parenthesis (). Run the above example and see the output as shown below.
+C:\> node app.js 
+Hello World
+--------------------------------------------------------------------
+
+Export function as a class
+In JavaScript, a function can be treated like a class. The following example exposes a function which can be used like a class.
+Person.js
+
+module.exports = function (firstName, lastName) {
+ this.firstName = firstName;
+ this.lastName = lastName;
+ this.fullName = function () {
+   return this.firstName + " " + this.lastName;
+ };
+};
+ 
+ 
+// IIFE     or      fatArrow
+
+
+The above module can be used as shown below.
+
+app.js
+var person = require("./Person.js");
+console.log("person : ", person);
+ 
+var person1 = new person("James", "Bond");
+console.log(person1.fullName());
+ 
+
+As you can see, we have created a personal object using a new keyword. Run the above example as below.
+C:\> node app.js 
+James Bond
+In this way, you can export and import a local module created in a separate file under the root folder.
+
+Node.js also allows you to create modules in sub folders. Let's see how to load modules from sub folders.
+
+Loading Module from seperate folder : package
+
+Use the full path of a module file where you have exported it using module.exports. For example, if the log module in the log.js is stored under the "utility" folder under the root folder of your application then import it as shown below.
+
+ 
+module.exports.msg = "We are in 'utility module...'";
+ 
+
+app.js
+
+var log = require("./modules/utility");
+ 
+console.log("log : ", log);
+ 
+
+
+In the above example, . is for the root folder and then specifies the exact path of your module file. Node.js also allows us to specify the path to the folder without specifying file name. 
+For example, you can specify only the utility folder without specifying log.js as shown below.
+
+npm init
+
+	app.js
+
+var log = require('./utility');
+
+In the above example, 
+Node will search for a package definition file called package.json inside the utility folder. 
+This is because Node assumes that this folder is a package and will try to look for a package definition. 
+The package.json file should be in a module directory. 
+The package.json under utility folder specifies the file name using "main" key as below.
+
+./utility/package.json
+
+{
+ "name": "utility",
+ "version": "1.0.0",
+ "description": "' we are in dummy package'",
+ "main": "utility.js",
+ "scripts": {
+   "test": "echo \"Error: no test specified\" && exit 1"
+ },
+ "author": "",
+ "license": "ISC"
+}
+ 
+
+
+Now, Node.js will find the log.js file using the main entry in package.json and import it.
+
+Note : If package.json file does not exist then it will look for index.js file as a module file by default.
+
