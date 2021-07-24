@@ -1,0 +1,36 @@
+Node Js
+An open-source server-side runtime javascript environment which provides a rich library of various JavaScript modules to simplify the development of web applications.  
+─
+History
+Node.js was originally written by Ryan Dahl in 2009 [ JS based].
+In January 2010, a package manager was introduced for the Node.js environment called npm.
+In June 2011, Microsoft and Joyent implemented a native Windows version of Node.js.
+The first Node.js build supporting Windows was released in July 2011.
+In September 2015, Node.js v0.12 and io.js v3.3 were merged back together into Node v4.0. This brought V8 ES6 features into Node.js, and a long-term support release cycle.
+
+Overview
+Node.js is an open-source server-side runtime environment built on Chrome's V8 JavaScript engine. 
+Node.js allows you to run JavaScript on the server.
+It provides an event-driven, non-blocking (asynchronous) I/O and cross-platform runtime environment for building highly scalable server-side applications using JavaScript.
+It is used to develop I/O intensive web applications like video streaming sites, single-page applications, and other web applications.
+
+Node.js official website: https://nodejs.org
+
+Advantages of Node.js
+Node.js is an open-source under the MIT license. (MIT license is a free software license originating at the Massachusetts Institute of Technology (MIT).)
+Uses JavaScript to build an entire server-side application.
+A lightweight framework that includes bare minimum modules. Other modules can be included as per the need of an application.
+Asynchronous by default. So it performs faster than other frameworks.
+A cross-platform framework that runs on Windows, MAC or Linux.
+Setup Development Environment
+The following tools/SDK are required for developing a Node.js application on any platform.
+
+Node.js
+Node Package Manager (NPM)
+IDE (Integrated Development Environment) or Text Editor
+
+NPM (Node Package Manager) is included in Node.js installation since Node version 0.6.0., so there is no need to install it separately.
+
+Install Node.js on Windows
+Visit Node.js official web site https://nodejs.org
+It will automatically detect OS and display download links as per your Operating System.
