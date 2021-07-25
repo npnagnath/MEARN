@@ -1,0 +1,20 @@
+{
+  "name": "out-side_pack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "abcd_package": "^1.0.0",
+    "package-first-nilima-sevenmentor": "^1.0.0",
+    "rakhi_package": "^1.0.0",
+    "sag_pack_in": "^1.0.0",
+    "saurav11_first_package": "^1.0.0",
+    "tanmai_package": "^1.0.0"
+  }
+}

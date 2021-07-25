@@ -1,12 +1,11 @@
 {
   "name": "first-package-seven-mentor",
-  "version": "1.0.0",
-  "description": "",
-  "main": "main.js",
+  "version": "1.1.1",
+  "description": "\"dummy...\"",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "MIT"
 }
