@@ -1,9 +1,10 @@
+// import { http } from 'http'
 var http = require("http");
 
 var server = http.createServer(function (req, res) {
   if (req.url == "/") {
     // www.facebook.com    ==  /   [ home page ] (http://localhost:5000/)
-    res.writeHead(200, { "content-type": "text/html" });
+    res.writeHead(200, { "content-type": "text/html" }); // header of res
     res.write("<h1>Hello from nodeJs</h1>");
     res.end();
   } else if (req.url == "/admin") {
