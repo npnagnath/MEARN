@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 id="demo">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio quisquam
+      doloremque amet veritatis eius, labore voluptate natus et eum quas
+      sapiente aperiam, repellendus voluptatibus iusto laboriosam tempore
+      repellat ab distinctio!
+    </h1>
+    <button onclick="chData()">Click me</button>
+    <button id="abc345xyz">Click me again</button>
+
+    <script>
+      function chData() {
+        var ele = document.getElementById("demo");
+        ele.innerHTML = "Hello there...!";
+      }
+
+      var eveList = document.getElementById("abc345xyz");
+      eveList.addEventListener("click", chData);
+    </script>
+  </body>
+</html>
