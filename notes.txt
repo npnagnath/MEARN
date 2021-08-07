@@ -499,3 +499,97 @@ James Bond
 In this way, you can export and import a local module created in a separate file under the root folder.
 
 Node.js also allows you to create modules in sub folders. Let's see how to load modules from sub folders.
+
+
+ 
+
+What is Callback [ setTimeOut, setInterval, eves, etc ]?   CallBackHell -> Promises -> async-await-> Observables
+Callback is an asynchronous equivalent for a function. A callback function is called at the completion of a given task. Node makes heavy use of callbacks. All the APIs of Node are written in such a way that they support callbacks.
+
+Blocking Code
+
+ 
+var fs = require("fs");
+var data = fs.readFileSync("file.txt");
+console.log(data.toString()); // Not, Warn, Fat, Par
+console.log("Task Completed Successfully..!");
+ 
+
+Non-Blocking Code 
+
+ 
+ 
+var fs = require("fs");
+ 
+fs.readFile('file.txt', function (err, data) {
+  if (err) return console.error(err);
+  	console.log(data.toString());
+	console.log("Task Completed Successfully...");
+});
+ 
+
+
+
+
+
+Redirecting requests
+var http = require("http"); // Import Node.js core module
+var server = http.createServer(function (req, res) {
+ //create web server
+ 
+ if (req.url == "/") {
+   res.writeHead(200, { "Content-Type": "text/html" });
+   res.write('<form action="send" method="post">'); // GET -> PARAMOBJ, POST-> BODYObj
+   res.write('<input type="text" ><br>');
+   res.write('<input type="submit">');
+   res.write("</form>");
+   return res.end();
+ } else if (req.url == "/send" && req.method === "POST") {
+   res.statusCode = 302;
+   res.setHeader("Location", "/");
+   return res.end();
+ } else res.end("Invalid Request!");
+});
+server.listen(5000); //6 - listen for any incoming requests
+ 
+
+Nodejs Framework
+
+
+
+
+
+Express JS
+Makes Node.js web application development fast and easy.
+
+Advantages Of Express.js
+Easy to configure and customize.
+Allows you to define routes of your application based on HTTP methods and URLs.
+Includes various middleware [ Mongoose ] modules which you can use to perform additional tasks on request and response.
+Easy to integrate with different template engines like KendoUI, Jade, Vash, EJS etc. 
+Allows you to define an error handling middleware.
+Easy to serve static files and resources of your application.
+Allows you to create a REST API server.
+Easy to connect with databases such as MongoDB, Redis, MySQL.
+Installation :
+You can install express.js using npm. The following command will install the latest version of express.js globally on your machine so that every Node.js application on your machine can use it.
+
+node.js
+
+
+express
+
+
+The following command will create package.json  for  express.js in the project folder.
+2> npm init --yes
+
+The following command will install the latest version of express.js globally in your project folder.
+1> npm install -g express
+
+
+The following command will install the latest version of express.js local to your project folder.
+3> npm install express --save
+As you know, --save will update the package.json file by specifying express.js dependency.
+
+npm install -g nodemon             [ nodemon filename : ex. nodemon app.js ]
+npm install nodemon
