@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const prods = [
+        { prodId: 1001, prodName: "Mobile" },
+        { prodId: 1002, prodName: "Laptop" },
+        { prodId: 1003, prodName: "Books" },
+      ];
+
+      for (var i = 0; i < prods.length; i++) {
+        document.write(`<h1>1. ${prods[i].prodName}</h1>`);
+      }
+
+      for (let prod of prods) {
+        document.write(`<h1>2. ${prod.prodName}</h1>`);
+      }
+
+      prods.map((prod) => document.write(`<h1>3. ${prod.prodName}</h1>`));
+    </script>
+  </body>
+</html>
