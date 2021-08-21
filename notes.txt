@@ -928,3 +928,643 @@ This data type stores the current date or time in Unix time format. It makes it 
 
 
 
+
+
+
+Command:     	use  ‘dbname’
+			use( )       -> function    ex.     hide( )
+			obj.use( )  -> method   ex.     document.write( )
+
+use: to create DB or to switch in that DB if already created.
+	Ex.     use <dbName>                                         [ switched to DB dbName ]
+DB: to know current DB 
+	Ex.     DB                                                      [  dbName ]
+show   to know current   
+	Ex.     show dbs                                                  [  admin   0.000GB
+config  0.000GB
+local   0.000GB ]
+
+
+
+
+MongoDB Shell
+MongoDB has a JavaScript shell that allows interaction with MongoDB instances from the command line.
+
+If you want to create a table, you should name the table and define its column and each column's data type.
+
+The shell is useful for performing administrative functions and running instances.
+
+How to run the shell
+To start the shell, open a command prompt, run it as an administrator then run the mongo executable:
+
+
+$ mongod   
+  	To connect
+$ mongo   
+
+MongoDB shell version: 2.4.0
+Connecting to: test
+																																															
+You should start MongoDB before starting the shell because the shell automatically attempts to connect to a MongoDB server on startup.
+
+The shell is a full-featured JavaScript interpreter. It is capable of running an Arbitrary JavaScript program.
+
+Let us take a simple mathematical program:
+
+>x= 100  
+100  
+
+>x/ 5;  
+20  
+
+> console/shell:  js     node    mongo
+
+You can also use the JavaScript libraries
+
+> "Hello, World!".replace("World", "MongoDB");  
+Hello, MongoDB! 
+
+
+
+You can even define and call JavaScript functions
+
+> function factorial (n) {  
+if (n <= 1) return 1;  
+return n * factorial(n - 1);  
+}  
+  
+> factorial (5);  
+  
+120  
+
+
+Note: You can create multiple commands.
+
+When you press "Enter", the shell detects whether the JavaScript statement is complete or not.
+
+If the statement is not completed, the shell allows you to continue writing it on the next line. If you press "Enter" three times in a row, it will cancel the half-formed command and get you back to the > - prompt.
+
+
+
+Data Modeling in MongoDB
+
+In MongoDB, data has a flexible schema. It is totally different from the SQL database where you had to determine and declare a table's schema before inserting data. MongoDB collections do not enforce document structure.
+
+The main challenge in data modeling is balancing the need for the application, the performance characteristics of the database engine, and the data retrieval patterns.
+
+Consider the following things while designing the schema in MongoDB
+Always design schema according to user requirements.
+Do join on write operations, not on read operations.
+Objects which you want to use together should be combined into one document. Otherwise, they should be separated (make sure that there should not be a need for joins).
+Optimize your schema for more frequent use cases.
+Do complex aggregation in the schema.
+You should duplicate the data but in a limit, because disc space is cheaper than compute time.
+
+
+
+For example:
+
+let us take an example of a client who needs a database design for his website. His website has the following requirements:
+
+Every post is distinct (contains the unique title, description, and url).
+
+Every post can have one or more tags.
+
+Every post has the name of its publisher and the total number of likes.
+
+Each post can have zero or more comments and the comments must contain the user name, message, data-time and likes.
+
+For the above requirement, a minimum of three tables are required in RDBMS.
+
+Fig: table structure
+
+ng  ->     $var:builtinEvent      var$:Observable    _var:diOBJ
+
+Json:      []  ,     “”     :   {}
+
+But in MongoDB, schema design will have one collection post and has the following structure:
+
+{
+_id: POST_ID        
+title: TITLE_OF_POST,
+description: POST_DESCRIPTION,
+by: POST_BY,
+url: URL_OF_POST,
+tags: [TAG1, TAG2, TAG3],
+likes: TOTAL_LIKES,
+comments: [
+{
+user: 'COMMENT_BY',
+message: TEXT,
+datecreated: DATE_TIME,
+like: LIKES
+},
+{
+user: 'COMMENT_BY',
+message: TEST,
+dateCreated: DATE_TIME,
+like: LIKES
+}
+]
+}
+
+What is BSON in MongoDB?
+BSON is a binary serialization format used to store documents and make remote procedure calls in MongoDB. The BSON specification is located at bsonspec.org. Each BSON type has both integer and string identifiers as listed in the following table: Type.
+
+MongoDB Data Types and Corresponding ID Number
+Type
+Description
+Number
+Double
+Represents a float value.
+1
+String
+BSON strings are UTF-8. In general, drivers for each programming language convert from the language’s string format to UTF-8 when serializing and deserializing BSON. This makes it possible to store most international characters in BSON strings with ease. [1] In addition, MongoDB $regex queries support UTF-8 in the regex string.
+2
+Object
+Represents embedded documents.
+3
+Array
+Sets or lists of values can be represented as arrays:
+4
+Binary data
+Binary data is a string of arbitrary bytes, it cannot be manipulated from the shell.
+5
+Object id
+ObjectIds (MongoDB document identifier, equivalent to a Primary key) are: small, likely unique, fast to generate, and ordered. These values consist of 12-bytes, where the first four bytes are a timestamp that reflects the ObjectId’s creation.
+7
+Boolean
+A logical true or false. Use to evaluate whether a condition is true or false
+8
+Date
+BSON Date is a 64-bit integer that represents the number of milliseconds since the Unix epoch (Jan 1, 1970). This results in a representable date range of about 290 million years into the past and future.
+9
+Null
+It represents both a null value and a nonexistent field.
+10
+Regular Expression
+RegExp maps directly to a Javascript RegExp
+11
+JavaScript
+ 
+13
+Symbol
+Not supported by the shell. If the shell gets a symbol from the database, it will convert it into a string.
+14
+JavaScript (with scope)
+ 
+15
+32-bit integer
+Numbers without decimal points will be saved as 32-bit integers.
+16
+Timestamp
+BSON has a special timestamp type for internal MongoDB use and is not associated with the regular Date type. Timestamp values are a 64 bit value where :
+The first 32 bits are a time_t value (seconds since the Unix epoch).
+the second 32 bits are an incrementing ordinal for operations within a given second.
+17
+64-bit integer
+Numbers without a decimal point will be saved and returned as 64-bit integers.
+18
+Min key
+MinKey compares less than all other possible BSON element values, respectively, and exists primarily for internal use.
+255
+Max key
+MaxKey compares greater than all other possible BSON element values, respectively, and exists primarily for internal use.
+127
+
+
+
+
+
+MongoDB Create Database
+
+Use Database method:
+
+There is no database command in MongoDB. Actually, MongoDB does not provide any command to create a database.
+
+It may look like a weird concept, if you are from a traditional SQL background where you need to create a database, table and insert values in the table manually.
+
+Here, in MongoDB you don't need to create a database manually because MongoDB will create it automatically when you save the value into the defined collection at the first time.
+
+You also don't need to mention what you want to create, it will be automatically created at the time you save the value into the defined collection.
+
+Here one thing is very remarkable that you can create a collection manually by "db.createCollection()" but not the database.
+
+How and when to create database
+If there is no existing database, the following command is used to create a new database.
+
+						J&K                                            { “J&K” : “Alex”}
+			10000		Alex
+			9998		           Ali
+Working with the mongo Shell
+To display the database you are using, type db:
+> db 
+test 
+The operation should return   > test , which is the default database.
+
+To switch databases, issue the use <db> helper, as in the following example:
+> use <database>
+
+You can switch to non-existing databases. When you first store data in the database, such as by creating a collection, MongoDB creates the database. For example, the following creates both the database myNewDatabase and the collection myCollection during the insertOne() operation:
+
+> use myNewDatabase    //  var db = myNewDatabase
+> db.createCollection(“myCollection”);    //Optional
+> db.myCollection.insertOne( { x: 1 } );
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("5f3e214c1fbd2a6371f2f990")
+}
+> db.myCollection.insert( { x: 1 } );
+WriteResult({ "nInserted" : 1 })
+>
+The db.myCollection.insertOne() is one of the methods available in the mongo shell.
+db refers to the current database.
+myCollection is the name of the collection.
+If the mongo shell does not accept the name of a collection, you can use the alternative db.getCollection() syntax. For instance, if a collection name contains a space or hyphen, starts with a number, or conflicts with a built-in function:
+select * from myCollection
+db.getCollection("myCollection").find();
+db.getCollection(var).find();
+db.myCollection.find();
+
+ 
+
+
+
+Syntax:
+
+Use dbName     //  db=dbName
+
+Syntax = >  db.collection.document.method( )    ex. db.createCollection(‘collectionName’);
+
+database.collection.documentMethods( )    ex.   db.collectionName.insert({‘name’: ‘Alex’});
+
+
+db.dbOpMethod();                         ex . db.dropDatabase()
+
+db.collection.OpMethod()          ex.     db.myCollection.drop()
+
+db.colletion.document.OpMethod()   ex.   db.myCollection.insert( data)
+
+use DATABASE_NAME  
+If the database already exists, it will return the existing database.
+
+Let's take an example to demonstrate how a database is created in MongoDB. In the following example, we are going to create a database "demodb".
+
+See this example
+
+>use demodb  
+Switched to db demodb
+
+
+To check the currently selected database, use the command db:
+
+>db  
+demodb
+
+To check the database list, use the command show dbs:
+
+>show dbs  
+local 0.078GB
+
+
+Here, your created database "demodb" is not present in the list, insert at least one document into it to display database:
+
+>db.myCollection.insert({"name":"test"})  
+WriteResult({ "nInserted": 1})
+
+>show dbs  
+demodb 0.000GB
+local 0.078GB
+
+
+
+MongoDB Drop Database
+The dropDatabase command is used to drop a database. It also deletes the associated data files. It operates on the current database.
+
+Syntax:
+
+db.dropDatabase()  
+This syntax will delete the selected database. In case you have not selected any database, it will delete default "test" database.
+
+To check the database list, use the command show dbs:
+
+>show dbs  
+local 0.078GB
+If you want to delete the database "demodb", use the dropDatabase() command as follows:
+
+>use demodb  
+switched to the db demodb
+
+>db.dropDatabase()  
+{ "dropped": "demodb", "ok": 1}
+Now check the list of databases:
+
+>show dbs  
+local 0.078GB
+
+
+
+MongoDB Create Collection
+In MongoDB, db.createCollection(name, options) is used to create a collection. But usually you don?t need to create a collection. MongoDB creates a collection automatically when you insert some documents. It will be explained later. First see how to create collection:
+
+Syntax:
+
+db.createCollection(name, options) 
+
+  
+Here,
+
+Name: is a string type, specifies the name of the collection to be created.
+
+Options: is a document type, specifies the memory size and indexing of the collection. It is an optional parameter.
+
+
+
+Let's take an example to create a collection. In this example, we are going to create a collection named SSSIT.
+
+>use test  
+switched to db test
+
+>db.createCollection("myNewCollection")  
+{ "ok" : 1 }
+
+To check the created collection, use the command "show collections".
+
+>show collections  
+myNewCollection
+
+
+How does MongoDB create collection automatically
+MongoDB creates collections automatically when you insert some documents. For example: Insert a document named seomount into a collection named SSSIT. The operation will create the collection if the collection does not currently exist.
+
+>db.myNewCollection.insert({"name" : "seomount"})    
+>show collections    
+myNewCollection  
+
+
+If you want to see the inserted document, use the find() command.
+
+Syntax:
+
+db.collection_name.find()
+
+
+
+MongoDB Drop collection
+
+In MongoDB, db.collection.drop() method is used to drop a collection from a database. It completely removes a collection from the database and does not leave any indexes associated with the dropped collections.
+
+The db.collection.drop() method does not take any argument and produce an error when it is called with an argument. This method removes all the indexes associated with the dropped collection.
+
+Syntax:
+
+db.COLLECTION_NAME.drop()  
+
+MongoDB Drop collection example
+
+Let's take an example to drop collection in MongoDB.
+
+First check the already existing collections in your database.
+
+>use mydb  
+Switched to db mydb 
+
+> show collections  
+SSSIT
+system.indexes
+
+Note: Here we have a collection named SSSIT in our database.
+
+Now drop the collection with the name SSSIT:
+
+>db.SSSIT.drop()  
+True
+
+Now check the collections in the database:
+
+>show collections  
+System.indexes
+
+Now, there are no existing collections in your database.
+
+Note: The drop command returns true if it successfully drops a collection. It returns false when there is no existing collection to drop.
+
+
+
+
+
+
+MongoDB insert documents
+In MongoDB, the db.collection.insert() method is used to add or insert new documents into a collection in your database.
+
+Upsert
+
+There are also two methods "db.collection.update()" method and "db.collection.save()" method used for the same purpose. These methods add new documents through an operation called upsert.
+
+Upsert is an operation that performs either an update of existing document or an insert of new document if the document to modify does not exist.
+
+Syntax
+
+>db.COLLECTION_NAME.insert(document)  
+
+Let's take an example to demonstrate how to insert a document into a collection. In this example we insert a document into a collection named demoCollection. This operation will automatically create a collection if the collection does not currently exist.
+
+Example
+
+db.myCollection.insert({
+ data: [
+   {
+     id: 1001,
+     name: "Samsung SCREEN 3",
+     description: "5.5 Screen for Moto g",
+     inStock: 10,
+     colorName: "Blue",
+     isOnline: false,
+     country: "India",
+     price: 12000,
+     prodImg: "../../../assets/img/mob2.png",
+     clsVar: true,
+     qntt: 0,
+   },
+   {
+     id: 1002,
+     name: "screen 5",
+     description: "5 Screen for Samsung",
+     inStock: 8,
+     colorName: "red",
+     isOnline: true,
+     country: "Germany",
+     price: 12000,
+     prodImg: "../../../assets/img/mob2.png",
+     clsVar: true,
+     qntt: 0,
+   },
+   {
+     id: 1003,
+     name: "Key Panel",
+     description: "Key panel for Nokia",
+     inStock: 12000,
+     colorName: "green",
+     isOnline: false,
+     country: "",
+     price: 12000,
+     prodImg: "../../../assets/img/mob2.png",
+     clsVar: true,
+     qntt: 0,
+   },
+ ],
+});
+ 
+
+
+
+After the successful insertion of the document, the operation will return a WriteResult object with its status.
+
+Output:
+
+WriteResult({ "nInserted" : 1 })
+
+Here the nInserted field specifies the number of documents inserted. If an error is occurred then the WriteResult will specify the error information.
+
+Check the inserted documents
+If the insertion is successful, you can view the inserted document by the following query.
+
+>db.demoCollection.find()  
+
+You will get the inserted document in return.
+
+Output:
+
+{ "_id" : ObjectId("56482d3e27e53d2dbc93cef8"), "course" : "java", "details" : 
+{ "duration" : "6 months", "Trainer" : "Sonoo jaiswal" }, "Batch" : 
+[ {"size" : "Small", "qty" : 15 }, { "size" : "Medium", "qty" : 25 } ],
+ "category" : "Programming language" }
+
+
+Note: Here, the ObjectId value is generated by MongoDB itself. It may differ from the one shown.
+
+MongoDB insert multiple documents
+If you want to insert multiple documents in a collection, you have to pass an array of documents to the db.collection.insert() method.
+
+Create an array of documents
+Define a variable named Allcourses that hold an array of documents to insert.
+
+var Allcourses =  
+    [  
+      {  
+        Course: "Java",  
+        details: { Duration: "6 months", Trainer: "Sonoo Jaiswal" },  
+        Batch: [ { size: "Medium", qty: 25 } ],  
+        category: "Programming Language"  
+      },  
+      {  
+        Course: ".Net",  
+        details: { Duration: "6 months", Trainer: "Prashant Verma" },  
+        Batch: [ { size: "Small", qty: 5 }, { size: "Medium", qty: 10 }, ],  
+        category: "Programming Language"  
+      },  
+      {  
+        Course: "Web Designing",  
+        details: { Duration: "3 months", Trainer: "Rashmi Desai" },  
+        Batch: [ { size: "Small", qty: 5 }, { size: "Large", qty: 10 } ],  
+        category: "Programming Language"  
+      }  
+    ];  
+
+Inserts the documents
+Pass this Allcourses array to the db.collection.insert() method to perform a bulk insert.
+
+> db.demoCollection.insert( Allcourses );  
+
+After the successful insertion of the documents, this will return a BulkWriteResult object with the status.
+
+BulkWriteResult({
+   "writeErrors" : [ ],
+   "writeConcernErrors" : [ ],
+   "nInserted" : 3,
+   "nUpserted" : 0,
+   "nMatched" : 0,
+   "nModified" : 0,
+   "nRemoved" : 0,
+   "upserted" : [ ]
+})
+
+Note: Here the nInserted field specifies the number of documents inserted. In the case of any error during the operation, the BulkWriteResult will specify that error.
+
+You can check the inserted documents by using the following query:
+
+>db.demoCollection.find()  
+Insert multiple documents with Bulk
+In its latest version of MongoDB (MongoDB 2.6) provides a Bulk() API that can be used to perform multiple write operations in bulk.
+
+You should follow these steps to insert a group of documents into a MongoDB collection.
+
+Initialize a bulk operation builder
+First initialize a bulk operation builder for the collection demoCollection.
+
+var bulk = db.demoCollection.initializeUnorderedBulkOp();  
+This operation returns an unorder operations builder which maintains a list of operations to perform .
+
+Add insert operations to the bulk object
+bulk.insert(  
+   {  
+     course: "java",  
+     details: {  
+        duration: "6 months",  
+        Trainer: "Sonoo jaiswal"  
+     },  
+     Batch: [ { size: "Small", qty: 15 }, { size: "Medium", qty: 25 } ],  
+     category: "Programming language"  
+   }  
+);  
+Execute the bulk operation
+Call the execute() method on the bulk object to execute the operations in the list.
+
+bulk.execute();  
+After the successful insertion of the documents, this method will return a BulkWriteResult object with its status.
+
+BulkWriteResult({
+   "writeErrors" : [ ],
+   "writeConcernErrors" : [ ],
+   "nInserted" : 1,
+   "nUpserted" : 0,
+   "nMatched" : 0,
+   "nModified" : 0,
+   "nRemoved" : 0,
+   "upserted" : [ ]
+})
+
+Here the nInserted field specifies the number of documents inserted. In the case of any error during the operation, the BulkWriteResult will specify that error.
+
+
+Command Helpers
+The mongo shell provides various help. The following table displays some common help methods and commands:
+Help Methods and Commands
+Description
+help
+Show help.
+db.help()
+Show help for database methods.
+db.<collection>.help()
+Show help on collection methods. The <collection> can be the name of an existing collection or a non-existing collection.
+show dbs
+Print a list of all databases on the server.
+The operation corresponds to the listDatabases command. If the deployment runs with access control, the operation returns different values based on user privileges. See listDatabases Behavior for details.
+use <db>
+Switch the current database to <db>. The mongo shell variable db is set to the current database.
+show collections
+Print a list of all collections for the current database.
+SEE ALSO
+show collections
+show users
+Print a list of users for the current database.
+show roles
+Print a list of all roles, both user-defined and built-in, for the current database.
+show profile
+Print the five most recent operations that took 1 millisecond or more. See documentation on the database profiler for more information.
+show databases
+Print a list of all available databases.
+The operation corresponds to the listDatabases command. If the deployment runs with access control, the operation returns different values based on user privileges. See listDatabases Behavior for details.
+load()
+Execute a JavaScript file. See Write Scripts for the mongo Shell for more information.
+
