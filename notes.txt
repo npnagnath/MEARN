@@ -593,3 +593,338 @@ As you know, --save will update the package.json file by specifying express.js d
 
 npm install -g nodemon             [ nodemon filename : ex. nodemon app.js ]
 npm install nodemon
+
+
+
+
+{ Mongo: DB }
+
+MongoDB was created by Dwight Merriman and Eliot Horowitz, who had encountered development and scalability issues with traditional relational database approaches while building Web applications at DoubleClick, an Internet advertising company that is now owned by Google Inc. 
+
+According to Merriman, the name of the database was derived from the word humongous to represent the idea of supporting large amounts of data. Merriman and Horowitz helped form 10Gen Inc. in 2007 to commercialize MongoDB and related software. The company was renamed MongoDB Inc. in 2013. 
+
+The database was released to open source in 2009 and is available under the terms of the Free Software Foundation's GNU AGPL Version 3.0 commercial license. 
+
+
+What is Data?  :                         ‘Alex’
+In simple words, data can be facts related to any object in consideration.
+For example, your name, age, height, weight, etc are some data related to you.
+A picture , image , file , pdf etc can also be considered data.
+
+
+What is a Database?                 | Alex | Mumbai | 828988898 | 
+
+The database is a systematic collection of data. 
+Databases support storage and manipulation of data. 
+Databases make data management easy. Let's discuss a few examples.
+
+An online telephone directory would definitely use a database to store data pertaining to people, phone numbers and other contact details, etc.
+
+Your electricity service provider is obviously using a database to manage billing, client related issues, to handle fault data, etc.
+Let's also consider Facebook. It needs to store, manipulate and present data related to members, their friends, member activities, messages, advertisements and a lot more.
+
+
+What is a Database Management System (DBMS)?          |Ali |Khan | 
+Database Management System (DBMS) is a collection of programs which enables its users to access the database, manipulate data, and report/representation of data.
+
+It also helps to control access to the database.
+
+Database Management Systems are not a new concept and as such had been first implemented in the 1960s.
+
+
+
+
+
+Relational DBMS 
+This type of DBMS defines database relationships in the form of tables, also known as relations. 
+Unlike network DBMS, RDBMS does not support many to many relationships.
+Relational DBMS usually have pre-defined data types that they can support. 
+This is the most popular DBMS type in the market. 
+Examples of relational database management systems include MySQL, Oracle, and Microsoft SQL Server database.
+
+
+
+
+
+pData - eduData - jobData - handData - j&kData - sportData
+
+What is SQL?   [ queries = commands ]
+Structured Query Language (SQL) pronounced as "S-Q-L" or sometimes as "Se-Quel" is actually the standard language for dealing with Relational Databases.
+
+SQL programming can be effectively used to insert, search, update, delete ( Create, Read, Update, Delete ) database records.
+
+That doesn't mean SQL cannot do things beyond that.
+
+In fact, it can do a lot of things including, but not limited to, optimizing and maintenance of databases. 
+
+Relational databases like MySQL Database, Oracle, MSSQL Server, Sybase, etc use SQL! How to use SQL syntaxes?
+
+ SQL syntaxes used in these databases are almost similar, except the fact that some are using a few different syntaxes and even proprietary SQL syntaxes.
+
+SQL Example
+
+ SELECT * FROM Members WHERE Age > 30 
+
+
+
+
+
+
+What is NoSQL?
+NoSQL is an upcoming category of Database Management Systems. 
+Its main characteristic is its non-adherence to Relational Database Concepts. NoSQL means "Not Only SQL". 
+
+The concept of NoSQL databases grew with internet giants such as Google, Facebook, Amazon etc who deal with gigantic volumes of data.
+
+When you use a relational database for massive volumes of data, the system starts getting slow in terms of response time.
+
+To overcome this, we could of course "scale up" our systems by upgrading our existing hardware.
+
+The alternative to the above problem would be to distribute our database load on multiple hosts as the load increases.
+
+This is known as "scaling out".
+
+ NoSQL databases are non-relational databases that scale out better than relational databases and are designed with web applications in mind.
+
+They do not use SQL to query the data and do not follow strict schemas like relational models. With NoSQL, ACID (Atomicity, Consistency, Isolation, Durability) features are not guaranteed.
+
+NoSQL database
+NoSQL databases are useful for large sets of distributed data.
+
+NoSQL databases are effective for big data performance issues that relational databases aren't built to solve. 
+They are most effective when an organization must analyze large chunks of unstructured data or data that are stored across multiple virtual servers in the cloud.
+
+
+Purpose to build MongoDB : JS -> {JSON}
+     "What was the need for MongoDB although there were many databases in action?"
+
+This is a very simple answer:
+
+“All modern applications require big data, fast features development, flexible deployment and the older database systems are not competent enough, so the MongoDB was obviously needed.”
+
+The main purpose to build MongoDB:
+
+Scalability : scale-up and scale-out
+Performance : High performance [ with DevOps ]
+High Availability : high req and res handling
+Scaling from single server deployments to large, complex multi-site architectures.
+
+Key points of MongoDB: 
+
+Develop Faster
+Deploy Easier
+Scale Bigger
+
+
+
+Database: in Mongo
+The database is a physical container for collections. Each DB gets its own set of files on the file system.
+A single MongoDB server typically has multiple databases.
+
+Collection :
+
+A collection is a group of an RDBMS table. A collection exists within a single database. Documents within a collection can have different fields. Typically, all documents in a collection are of similar or related purpose.
+
+
+
+
+Document :
+
+A document is a set of key-value pairs. Documents have a dynamic schema. Dynamic schema means that documents in the same set of fields or structure and common fields in a collection's documents may hold different types of data.
+
+
+
+Features of MongoDB
+These are some important features of MongoDB:
+
+1.  Support ad hoc queries
+
+In MongoDB, you can search by field, range query and it also supports regular expression searches.
+
+2. Indexing
+
+You can index any field in a document.
+
+3. Replication
+
+MongoDB supports Master-Slave replication.
+
+A master can perform Reads and Writes and a Slave copies data from the master and can only be used for reads or back up (not writes)
+
+4. Duplication of data
+
+MongoDB can run over multiple servers. The data is duplicated to keep the system up and also keep its running condition in case of hardware failure.
+
+5. Load balancing
+
+It has an automatic load balancing configuration because of data placed in shards.
+
+6. Supports map reduce and aggregation tools.
+
+7. Uses JavaScript instead of Procedures.
+
+8. It is a schema-less database written in C++.  [ Mongoose ]
+
+9. Provides high performance.
+
+10. Stores files of any size easily without complicating your stack.
+
+11. Easy to administer in the case of failures.
+
+12. It also supports:
+
+JSON data model with dynamic schemas
+Auto-sharding for horizontal scalability
+Built-in replication for high availability
+
+
+Example of a database:
+
+MongoDB stores data as documents, so it is known as the document-oriented database. It is a key feature of MongoDB. It offers document-oriented storage. It is very simple and you can program it easily.
+
+<script>
+ var a = {
+   // abcd...
+   FirstName: ‘Ajeet’,
+   Address: "Laxmi Nagar",
+   Spouse: [{ Name: "Charu" }],
+   FirstName: "Ravi",
+   Address: "Loni",
+ };
+</script>
+ 
+
+
+{
+ "FirstName": "Ajeet",
+ "Address": "Laxmi Nagar",
+ "Spouse": [{ "Name": "Charu" }],
+ "SecondName": "Ravi",
+ "NewAddress": "Loni"
+}
+ 
+
+
+
+There are two different documents (separated by ".").
+
+Storing data in this manner is called the document-oriented database.
+
+
+The following table shows the relationship of RDBMS terminology with MongoDB.
+RDBMS
+MongoDB
+Database
+Database
+Table
+Collection
+Tuple/Row
+Document
+column
+Field
+Table Join
+Embedded Documents
+Primary Key
+Default key _id provided by MongoDB itself
+
+
+Installation:
+
+1) mongodb.com -> find the download section ( then download the MongoDB according to O.S.)
+
+2) Search for MongoDB Community Server install the downloaded msi  / exe (complete version )
+
+3) create folders C:/data/db ( to store data of mongo )
+
+4) goto c-> Program files-> MongoDB-> Server-> 3.4-> bin
+
+mongod --dbpath=‘/..../data/db’: to establish a connection with DB       [ ‘/..../data/db’  -> path to ‘db’ folder ]
+
+mongo: mongo shell for queries
+
+
+5) press right click and open CMD from the same folder (it will show the same address as folder address..)
+
+6) enter: mongod to activate the server
+
+7) open another CMD with the same process and run the "mongo" command.
+
+8) > db ( run : to check db )
+
+9) to avoid the open CMD from the same folder we need to set an environment variable.
+
+10) copy the folder URL (up to bin) 
+11) right click on my computer ( on desktop ) and select properties -> advanced system settings -> environment variables -> choose path from variables ->
+press edit button -> add semicolon in variable value and paste the URL address -> press ok -> ok -> ok
+
+
+
+
+
+
+$ cd ~/Download
+$ tar xzf mongodb-osx-x86_64-2.2.3.tgz                          [ unzip ] 
+          create  MongoDB Data directory                                                 [ to store data ]
+$ sudo mkdir -p /data/db                               
+                                       …..source…….                           …...destination…..
+$ sudo mv mongodb-osx-x86_64-2.2.3  /usr/local/mongodb      [  mac’s installed app session ]
+
+$ whoami          [ to find username ]
+apple
+$ sudo chown apple /data/db
+
+Set mongodb/bin to $PATH
+$ cd 
+$ pwd                [ present working directory ]
+/Users/apple
+$ touch .bash_profile
+$ open .bash_profile
+
+export MONGO_PATH=/usr/local/mongodb
+export PATH=$PATH:$MONGO_PATH/bin           [ after paste both lines, save ( cmd + s ) and close]
+
+$ source .bash_profile             [ to reload file ]
+
+
+> cd
+>root
+>pwd
+
+In first terminal run mongod to start and connect server
+
+mongod --dbpath /usr/local/mongo/data/db
+
+
+
+
+In second terminal run mongo to start MongoDB shell
+
+ 
+MongoDB Data Types : JSON Based [ Javascript: Datatypes, Logic, Syntax, Errors ]
+Following is a list of usable data types in MongoDB.
+ 
+Data Types
+Description
+String
+The string is the most commonly used data type. It is used to store data. A string must be UTF 8 valid in MongoDB.
+Integer
+Integer is used to store the numeric value. It can be 32 bit or 64 bit depending on the server you are using.
+Boolean
+This datatype is used to store boolean values. It just shows YES/NO values.
+Double
+Double datatype stores floating point values.
+Min/Max Keys
+This data type compares a value against the lowest and highest bison elements.
+Arrays
+This datatype is used to store a list or multiple values into a single key.
+Object
+Object data type is used for embedded documents.
+Null
+It is used to store null values.
+Symbol
+It is generally used for languages that use a specific type.
+Date
+This data type stores the current date or time in Unix time format. It makes it possible to specify your own date time by creating an object of date and passing the value of the date, month, the year into it.
+
+
+
